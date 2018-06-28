@@ -1,18 +1,14 @@
 
 
 var originalText = $("#original-text").text();
-var minute = $('#minutes');
-var second = $('#seconds');
-var theTimer = $('.display-4');
-var milliseconds = $('#milli-seconds');
+var textArea = $('#text-area');
+
 
 var timer = 0;
 var minutes = 0;
 var seconds = 0;
 var milliSeconds = 0;
-var curentTime = "";
-var interval = 0;
-var timerRunning = false;
+
 
     // Add leading zero to numbers 9 or below:
     function leadingZero(time) {
@@ -37,12 +33,9 @@ var timerRunning = false;
         seconds = Math.floor((timer/100) - (minutes * 60));
         milliSeconds = Math.floor(timer - (seconds * 100) - (minutes * 6000));
 
-        minutes = leadingZero(minutes);
-        seconds = leadingZero(seconds);
-        milliSeconds = leadingZero(milliSeconds);
-
-        currentTime = minutes+":"+seconds+":"+milliSeconds;
-        theTimer.innerHTML = currentTime;
+        $('#minutes').text(leadingZero(minutes));
+        $('#seconds').text(leadingZero(seconds));
+        $('#milli-seconds').text(leadingZero(milli-seconds));
         timer++;
     }
 
@@ -58,13 +51,13 @@ var timerRunning = false;
     // Event listeners for keyboard input and the reset button:
 
 
-    $( "#text-area" ).keypress(function start() {
-        var textEnteredLen = textArea.val.length;
-        //console.log(textEnteredLen)
-        if (textEnteredLen === 0 && !timerRunning){
-            //start time
-            interval = setInterval(startTimer ,10);
-            timerRunning =true;
+        textArea.keypress(function (){
+            var textEnteredLen = $('#text-area').val().length;
+            if(textEnteredLen === 0){
+                //start timer
+            
+            setInterval(startTimer,10);
         }
-
 });
+       
+
